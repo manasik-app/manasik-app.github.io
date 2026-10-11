@@ -92,3 +92,6 @@ footer a { margin: 0 8px; }
 
 .doc ul { margin: 0; padding: 0 20px 0 0; color: var(--text-body); font-size: 15px; font-weight: 400; }
 .doc li { margin: 4px 0; }
+.doc ol { margin: 0; padding: 0 22px 0 0; color: var(--text-body); font-size: 15px; font-weight: 400; }
+.doc ol li { margin: 6px 0; }
+img.logo { background: none; border: 0; border-radius: 50%; display: block; object-fit: contain; }
