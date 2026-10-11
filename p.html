@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>افتح البرنامج في مناسك</title>
+<meta name="description" content="افتح هذا البرنامج في تطبيق مناسك أو حمّل التطبيق.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="مناسك">
+<meta property="og:locale" content="ar_AR">
+<meta property="og:title" content="مناسك">
+<meta property="og:description" content="برامج الحج والعمرة من شركات موثّقة. افتح البرنامج في التطبيق.">
+<meta property="og:image" content="https://manasik-app.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0f4c3a">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="wrap open">
+  <div class="logo" aria-hidden="true">م</div>
+  <h1>برنامج على مناسك</h1>
+  <p id="msg">افتح البرنامج في التطبيق لمشاهدة التفاصيل والسعر.</p>
+  <a class="btn btn-primary btn-block hidden" id="open" href="#">افتح في التطبيق</a>
+  <a class="btn btn-secondary btn-block" id="store" href="https://play.google.com/store/apps/details?id=com.manasik.app">حمّل التطبيق</a>
+  <p style="margin-top:22px"><a href="index.html">عن مناسك</a></p>
+</main>
+<script>
+(function () {
+  var STORE = "https://play.google.com/store/apps/details?id=com.manasik.app";
+  var UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  var id = new URLSearchParams(location.search).get("id") || "";
+  var open = document.getElementById("open");
+  var msg = document.getElementById("msg");
+
+  if (!UUID.test(id)) {
+    msg.textContent = "رابط البرنامج غير صالح. حمّل التطبيق لتصفح البرامج.";
+    return;
+  }
+  id = id.toLowerCase();
+  // intent:// يفتح التطبيق إن كان مثبتًا، وإلا يذهب لرابط المتجر
+  var intent = "intent://program/" + id + "#Intent;scheme=manasik;package=com.manasik.app;" +
+    "S.browser_fallback_url=" + encodeURIComponent(STORE) + ";end";
+  open.href = intent;
+  open.classList.remove("hidden");
+  if (/android/i.test(navigator.userAgent)) {
+    setTimeout(function () { location.href = intent; }, 400);
+  }
+})();
+</script>
+</body>
+</html>
